@@ -5,10 +5,12 @@ import future.keywords.in
 import future.keywords.contains
 import future.keywords.if
 
-valid_schema := json.match_schema(input, data.schema)
+selected_data := data[input.data_path]
+
+valid_schema := json.match_schema(input, selected_data.schema)
 
 valid_events contains event.event {
-	some event in data.events
+	some event in selected_data.events
 	some facts in event.conditions
 	every fact in facts {
 		selected_fact := input[fact.fact]
