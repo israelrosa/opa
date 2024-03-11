@@ -5,7 +5,7 @@ import future.keywords.in
 import future.keywords.contains
 import future.keywords.if
 
-selected_data := data[input.data_path]
+selected_data := data["organizations"][input.data_path]
 
 valid_schema := json.match_schema(input, selected_data.schema)
 
