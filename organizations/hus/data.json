@@ -1,0 +1,97 @@
+{
+  "schema": {
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "object",
+    "properties": {
+      "age": {
+        "type": "number"
+      },
+      "sinalVital": {
+        "type": "object",
+        "minProperties": 1,
+        "properties": {
+          "fcardiaca": {
+            "type": "number"
+          },
+          "frespiratoria": {
+            "type": "number"
+          },
+          "sistolica": {
+            "type": "number"
+          },
+          "temperatura": {
+            "type": "number"
+          }
+        }
+      }
+    },
+    "required": [
+      "sinalVital"
+    ]
+  },
+  "events": [
+    {
+      "name": "scoring",
+      "conditions": [
+        [
+          {
+            "fact": "sinalVital",
+            "operator": "greaterThan",
+            "path": "temperatura",
+            "value": 37.8
+          },
+          {
+            "fact": "sinalVital",
+            "operator": "lessThanInclusive",
+            "path": "frespiratoria",
+            "value": 9
+          },
+          {
+            "fact": "sinalVital",
+            "operator": "lessThanInclusive",
+            "path": "sistolica",
+            "value": 70
+          },
+          {
+            "fact": "sinalVital",
+            "operator": "lessThan",
+            "path": "fcardiaca",
+            "value": 101
+          }
+        ],
+        [
+          {
+            "fact": "sinalVital",
+            "operator": "greaterThan",
+            "path": "temperatura",
+            "value": 37.8
+          },
+          {
+            "fact": "sinalVital",
+            "operator": "lessThanInclusive",
+            "path": "frespiratoria",
+            "value": 9
+          },
+          {
+            "fact": "sinalVital",
+            "operator": "lessThanInclusive",
+            "path": "sistolica",
+            "value": 70
+          },
+          {
+            "fact": "sinalVital",
+            "operator": "greaterThan",
+            "path": "fcardiaca",
+            "value": 110
+          }
+        ]
+      ],
+      "event": {
+        "params": {
+          "score": 1
+        },
+        "type": "SCORE"
+      }
+    }
+  ]
+}
