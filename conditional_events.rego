@@ -1,7 +1,5 @@
 package conditional_events
 
-import rego.v1
-
 valid_schema := json.match_schema(input, data.schema)
 
 valid_events contains event.event if {
